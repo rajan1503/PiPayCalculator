@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GCV Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #424242;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: rgb(67, 8, 87);
+            color: gold;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .Fclass {
+            display: flex;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            width: 80%;
+        }
+        button {
+            background-color: #0b9257;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .heading {
+            color: white;
+            font-size: 330%;
+        }
+        input {
+            background-color: #b2b4ae;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="heading">Pi (&#960) Pay Calculator</h1>
+    <div class="Fclass">
+    <div class="container">
+        <h2>GCV Calculator</h2>
+        <label>Estimated Current GCV:</label>
+        <input type="number" id="gcv" placeholder="Enter GCV in $USD">
+        <label>Price of Product:</label>
+        <input type="number" id="price" placeholder="Enter Price in $USD">
+        <label>Fixed Transaction Charges 0.01 pi, The value will be adjusted based on market prices. </label>
+        <!--<input type="number" id="charges" placeholder="Enter Charges %">-->
+        <button onclick="calculateAmount()">Calculate</button>
+        <h3>Amount of Pi(&#960) to be Paid: <span id="result">0</span></h3>
+    </div>
+    <div class="container">
+        <h2>Mainnet Price Pay Calculator</h2>
+        <label>Current Mainnet Value :</label>
+        <input type="number" id="mnv" placeholder="Current Mainnet Value in $USD">
+        <label>Price of Product:</label>
+        <input type="number" id="price2" placeholder="Enter Price in $USD">
+        <label>Fixed Transaction Charges 0.01 pi, The value will be adjusted based on market prices. </label>
+        <!--<input type="number" id="charges" placeholder="Enter Charges %">-->
+        <button onclick="calculateAmount2()">Calculate</button>
+        <h3>Amount of Pi(&#960) to be Paid: <span id="result1">0</span></h3>
+    </div>
+    <div class="container">
+        <h2>Random Discount by vendor</h2>
+        <label>Amount to be Paid :</label>
+        <input type="number" id="atbp" placeholder="Amount to be paid in $USD">
+        <label>Discount value :</label>
+        <input type="number" id="discount" placeholder="Discount value in %">
+        <label>Fixed Transaction Charges 0.01 pi, The value will be adjusted based on market prices. </label>
+        <!--<input type="number" id="charges" placeholder="Enter Charges %">-->
+        <button onclick="calculateAmount3()">Calculate</button>
+        <h3>Amount of Pi(&#960) to be Paid: <span id="result3">0</span></h3>
+    </div>
+</div>
+    <script>
+        function calculateAmount() {
+            let gcv = parseFloat(document.getElementById('gcv').value);
+            let price = parseFloat(document.getElementById('price').value);
+            //let charges = parseFloat(document.getElementById('charges').value);
+            let chargespercent = (price / gcv) * 0.01;
+            if (isNaN(gcv) || isNaN(price) || gcv === 0) {
+                alert("Please enter valid values.");
+                return;
+            }
+            
+            let amountToBePaid = (price / gcv) + (chargespercent);
+            document.getElementById('result').innerText = amountToBePaid.toFixed(6);
+            document.getElementById('atbp').value = amountToBePaid.toFixed(6);
+        }
+        function calculateAmount2() {
+            let mnv = parseFloat(document.getElementById('mnv').value);
+            let price = parseFloat(document.getElementById('price2').value);
+            //let charges = parseFloat(document.getElementById('charges').value);
+            let chargespercent = (price / mnv) * 0.01;
+            if (isNaN(mnv) || isNaN(price) || gcv === 0) {
+                alert("Please enter valid values.");
+                return;
+            }
+            
+            let amountToBePaid1 = (price / mnv) + (chargespercent);
+            document.getElementById('result1').innerText = amountToBePaid1.toFixed(6);
+            document.getElementById('atbp').value = amountToBePaid1.toFixed(6);
+        }
+        function calculateAmount3() {
+            let atbp = parseFloat(document.getElementById('atbp').value);
+            let discount = parseFloat(document.getElementById('discount').value);
+            //let charges = parseFloat(document.getElementById('charges').value);
+            
+            if (isNaN(atbp) || isNaN(discount) || atbp === 0) {
+                alert("Please enter valid values.");
+                return;
+            }
+            let chargespercent3 = (atbp * discount) * 0.01;
+            let finalvalue = atbp - chargespercent3;
+            document.getElementById('result3').innerText = finalvalue.toFixed(6);
+        }
+    </script>
+</body>
+</html>
